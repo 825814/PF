@@ -20,5 +20,9 @@ Rails.application.routes.draw do
     get "/questions" => "questions#index"
     get "/questions/new" => "questions#new"
     post "/questions" => "questions#create"
+    get "/questions/:id" => "questions#show"
+
+    # resources :questions, only: [:new, :create, :index, :show]
+
   end
 end

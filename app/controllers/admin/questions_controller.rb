@@ -3,19 +3,29 @@ class Admin::QuestionsController < ApplicationController
     @test = "テストテキスト"
   end
 
+  def show
+    @question = Question.find(params[:id])
+  end
+
   def new
     @question = Question.new
+    # @text = "new_テストテキスト"
   end
-  
+
   def create
-    @puestion = Question.new(question_params)
+    @question = Question.new(question_params)
+    # @text = "create_テストテキスト"
     if @question.save
-      redirect_to ("/questions/new")
+      flash[:notice] = "成功！"
+      redirect_to ("/admin/questions/#{@question.id}")
     else
-      render ("/questions/new")
+      flash.now[:alert] = "失敗！"
+      render ("/admin/questions/new")
     end
   end
-  
+
+
+
   private
     def question_params
       params.require(:question).permit(:title, :body)
