@@ -1,1 +1,12 @@
 <%= @test %>
+<% @questions.each do |question| %>
+
+<div>
+  <p>タイトル</p><p><%= question.title %></p>
+</div>
+
+<div>
+  <p>本文</p><p><%= question.body %></p>
+ </div>
+<% end %>
+

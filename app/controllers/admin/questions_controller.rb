@@ -1,6 +1,7 @@
 class Admin::QuestionsController < ApplicationController
   def index
     @test = "テストテキスト"
+    @questions = Question.all
   end
 
   def show

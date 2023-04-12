@@ -17,6 +17,7 @@ Rails.application.routes.draw do
 
   namespace :admin do
 
+    root to: "questions#index"
     get "/questions" => "questions#index"
     get "/questions/new" => "questions#new"
     post "/questions" => "questions#create"
