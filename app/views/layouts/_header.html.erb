@@ -1,0 +1,29 @@
+<header>
+  <div class="header-logo">
+    PF
+  </div>
+  <ul>
+    <% if customer_signed_in? %>
+    <li>.
+      <%#= link_to "回答する", new_question_answer_path(answer.question_id, question.id) %>
+      <%= link_to "回答する", new_question_path %>
+    </li>
+    <li>
+      <%= link_to("質問作成", "/questions/new") %>
+    </li>
+    <li>
+      <%= link_to destroy_customer_session_path, method: :delete, class: "logout" do %>
+          <p>ログアウト</p>
+      <% end %>
+      <%#= link_to "ログアウト", destroy_customer_session_path, method: :delete %>
+    </li>
+    <% else %>
+      <li>
+        <%= link_to("新規登録", "/customers/sign_up") %>
+      </li>
+      <li>
+        <%= link_to("ログイン", "/customers/sign_in") %>
+      </li>
+    <% end %>
+  </ul>
+</header>
