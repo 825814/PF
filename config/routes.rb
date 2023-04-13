@@ -13,15 +13,21 @@ Rails.application.routes.draw do
 
   scope module: :public do
     root to: "homes#top"
+    resources :answers
   end
 
   namespace :admin do
 
     root to: "questions#index"
-    get "/questions" => "questions#index"
-    get "/questions/new" => "questions#new"
-    post "/questions" => "questions#create"
-    get "/questions/:id" => "questions#show"
+    resources :questions do
+      resources :answers, only: [:create]
+      # resources :choices, only: [:create]
+    end
+
+    # resources :answers, only: [:create] do
+    #   resources :questions
+    #   resources :choices, only: [:create]
+    # end
 
     # resources :questions, only: [:new, :create, :index, :show]
 
