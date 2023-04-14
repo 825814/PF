@@ -14,6 +14,10 @@ Rails.application.routes.draw do
 
   scope module: :public do
     root to: "homes#top"
+
+    post '/answers/confirm' => 'answers#confirm', as: 'confirm'
+    get '/answers/complete' => 'answers#complete', as: 'complete'
+
     resources :questions do
       resources :answers, only: [:new, :create]
     end
@@ -21,16 +25,15 @@ Rails.application.routes.draw do
 
   namespace :admin do
 
-    root to: "questions#index"
-    resources :questions do
-      resources :answers, only: [:create]
-      # resources :choices, only: [:create]
-    end
+    # root to: "questions#index"
+    get '/admin' => "questions#index"
 
-    # resources :answers, only: [:create] do
-    #   resources :questions
-    #   resources :choices, only: [:create]
-    # end
+    resources :questions, only: [:new, :create, :index]
+    resources :choices, only: [:new, :create, :index]
+
+    get '/questions/:question_id' => "answers#index"
+    get '/questions/:question_id/choices/:choice_id/' => "answers#show"
+    # resources :answers, only: [:index, :show]
 
     # resources :questions, only: [:new, :create, :index, :show]
 
